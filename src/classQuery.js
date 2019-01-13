@@ -534,6 +534,10 @@ class classQuery {
 		return [_classQuery.element];
 	}
 
+	selector_parent(_classQuery) {
+		return [_classQuery.element.parentElement];
+	}
+
 
 
 	/*
