@@ -3,7 +3,7 @@
 - **[Home](README.md)**
 - **[What are classQueries?](what-are-classqueries.md)**
 
-# Reference
+## Reference
 
 - **[Events](events/README.md)**
       - **[non-special events](events/non-special-events.md)**
