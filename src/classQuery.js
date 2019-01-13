@@ -72,54 +72,63 @@ class classQuery {
 
 					const classQueryParts = elementClass.split('_');
 
-					if (classQueryParts.length !== 4) {
-						classQuery.error('classQueries must consist of 4 parts!', element);
+					if (classQueryParts.length < 4) {
+						classQuery.error('classQueries must consist of at least 4 parts!', element);
 					}
 
-					classQueryParts.forEach((part, index) => {
-						const args = part.split('-');
-						const partName = args.splice(0, 1)[0];
+					// Extract the parts:
+					let cq = classQueryParts.splice(0, 1)[0];
+					let event = classQueryParts.splice(0, 1)[0];
+					let action = classQueryParts.splice(0, 1)[0];
+					let selector = classQueryParts.join('_'); // Take the rest of the classQuery
 
-						switch (index) {
-							case 1: // The classQuery event
-								if (!Object.keys(this.events).includes(partName)) {
-									classQuery.error('Unknown classQuery event "' + partName + '"!', element);
-								}
 
-								newClassQuery.eventName = partName;
-								newClassQuery.eventArguments = args;
-								newClassQuery.event = () => this.events[partName](newClassQuery);
-								break;
+					/* EVENT-PART */
+					if (!Object.keys(this.events).includes(event)) {
+						classQuery.error('Unknown classQuery event "' + event + '"!', element);
+					}
 
-							case 2: // The classQuery action
-								if (!Object.keys(this.actions).includes(partName)) {
-									classQuery.error('Unknown classQuery action "' + partName + '"!', element);
-								}
+					newClassQuery.eventName = event;
+					newClassQuery.event = () => this.events[event](newClassQuery);
+					/*  */
 
-								newClassQuery.actionName = partName;
 
-								// Detect argument binding
-								if (args[0] === '' && args[1] === '') {
-									newClassQuery.actionArguments = element.dataset;
-									newClassQuery.areActionArgumentsExternal = true;
-								} else {
-									newClassQuery.actionArguments = args;
-									newClassQuery.areActionArgumentsExternal = false;
-								}
-								newClassQuery.action = () => this.actions[partName](newClassQuery);
-								break;
+					/* ACTION-PART */
+					const args = action.split('-');
+					const actionName = args.splice(0, 1)[0];
 
-							case 3: // The classQuery selector
-								if (!Object.keys(this.selectors).includes(partName)) {
-									classQuery.error('Unknown classQuery selector "' + partName + '"!', element);
-								}
+					if (!Object.keys(this.actions).includes(actionName)) {
+						classQuery.error('Unknown classQuery action "' + actionName + '"!', element);
+					}
 
-								newClassQuery.selectorName = partName;
-								newClassQuery.selectorArguments = args;
-								newClassQuery.selector = () => this.selectors[partName](newClassQuery);
-								break;
-						}
-					});
+					newClassQuery.actionName = actionName;
+					newClassQuery.action = () => this.actions[actionName](newClassQuery);
+
+					// Detect argument binding
+					if (args[0] === '' && args[1] === '') {
+						newClassQuery.actionArguments = element.dataset;
+						newClassQuery.areActionArgumentsExternal = true;
+					} else {
+						newClassQuery.actionArguments = args;
+						newClassQuery.areActionArgumentsExternal = false;
+					}
+					/*  */
+
+
+					/* SELECTOR-PART */
+					const selectorSplit = selector.split('-');
+					const selectorMethod = selectorSplit.splice(0, 1)[0];
+					const selectorElement = selectorSplit.join('-');
+
+					if (!Object.keys(this.selectors).includes(selectorMethod)) {
+						classQuery.error('Unknown classQuery selector method "' + selectorMethod + '"!', element);
+					}
+
+					newClassQuery.selectorMethod = selectorMethod;
+					newClassQuery.selectorElement = selectorElement;
+					newClassQuery.selector = () => this.selectors[selectorMethod](newClassQuery);
+					/*  */
+
 
 					this.classQueries.push(newClassQuery);
 				}
@@ -506,19 +515,19 @@ class classQuery {
 	*/
 
 	selector_id(_classQuery) {
-		return [document.getElementById(_classQuery.selectorArguments[0])];
+		return [document.getElementById(_classQuery.selectorElement)];
 	}
 
 	selector_class(_classQuery) {
-		return document.getElementsByClassName(_classQuery.selectorArguments[0]);
+		return document.getElementsByClassName(_classQuery.selectorElement);
 	}
 
 	selector_name(_classQuery) {
-		return document.getElementsByName(_classQuery.selectorArguments[0]);
+		return document.getElementsByName(_classQuery.selectorElement);
 	}
 
 	selector_tag(_classQuery) {
-		return document.getElementsByTagName(_classQuery.selectorArguments[0]);
+		return document.getElementsByTagName(_classQuery.selectorElement);
 	}
 
 	selector_self(_classQuery) {
