@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Test</title>
+
+		<script src="../src/classQuery.js"></script>
+
+		<style>
+			.hidden {
+				display: none;
+			}
+		</style>
+	</head>
+	<body class="cq_init_setAttribute--_class-testtext" data-attributeName="title" data-attributeValue="test text">
+		<button class="cq_click_addClass-hidden_class-testtext">Hide Test Text</button>
+		<button class="cq_click_removeClass-hidden_class-testtext">Show Test Text</button>
+		<button class="cq_click_toggleClass-hidden_class-testtext">Toggle Test Text</button>
+
+		<p class="testtext">Test Text</p>
+		<p class="testtext">Test Text</p>
+		<p class="testtext">Test Text</p>
+		<p class="testtext">Test Text</p>
+
+		<br>
+
+		<button class="cq_click_removeAttribute-title_class-testtext">Remove titles</button>
+
+		<br>
+
+		<button class="cq_click_empty_tag-div">Empty all divs</button>
+		<div class="cq_click_duplicate_self">
+			Test
+		</div>
+
+		<br><br>
+
+		<div class="cq_click_remove_self">
+			RemoveSelf1
+		</div>
+		<div name="RemoveSelf2" class="cq_click_remove_self">
+			RemoveSelf2
+		</div>
+		<div class="cq_click_remove_self">
+			RemoveSelf3
+		</div>
+
+		<button class="cq_click_trigger-click_name-RemoveSelf2">Trigger click on RemoveSelf2</button>
+
+		<br><br>
+
+		<div class="cq_init_hide_self modal">Modal</div>
+		<button class="cq_click_addClass--_class-modal cq_click_show_class-modal" data-classes="is-active is-amazing">Activate Modal</button>
+
+		<br><br>
+
+		<div class="cq_init_scrollIntoView-smooth-end_self">ScrollIntoView</div>
+
+		<br><br><br><br><br><br>
+
+		<script type="text/javascript">
+			let cq = new classQuery();
+		</script>
+	</body>
+</html>
