@@ -1,6 +1,6 @@
 # Index
 
-- **[Home](README.md)**
+- **[Welcome](README.md)**
 - **[What are classQueries?](what-are-classqueries.md)**
 
 ## Reference
