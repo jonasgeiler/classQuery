@@ -55,7 +55,7 @@ class classQuery {
 	*/
 
 	buildClassQueries() {
-		const classQueryElements = document.querySelectorAll('*[class^=\'cq_\']');
+		const classQueryElements = document.querySelectorAll('*[class*="cq_"]');
 		this.classQueries = [];
 
 		let classQueryIDCount = 0;
