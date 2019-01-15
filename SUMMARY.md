@@ -1,32 +1,31 @@
-# Index
+# Table of contents
 
-- **[Welcome](README.md)**
-- **[What are classQueries?](What-are-classQueries.md)**
+* [Welcome](README.md)
+* [What are classQueries?](what-are-classqueries.md)
 
 ## Reference
 
-- **[Events](events/README.md)**
-  - **[non-special events](events/non-special-events.md)**
-  - **[init](events/init.md)**
+* [Events](reference/events/README.md)
+  * [non-special events](reference/events/non-special-events.md)
+  * [init](reference/events/init.md)
+* [Actions](reference/actions/README.md)
+  * [show](reference/actions/show.md)
+  * [hide](reference/actions/hide.md)
+  * [addClass](reference/actions/addclass.md)
+  * [removeClass](reference/actions/removeclass.md)
+  * [toggleClass](reference/actions/toggleclass.md)
+  * [setAttribute](reference/actions/setattribute.md)
+  * [removeAttribute](reference/actions/removeattribute.md)
+  * [empty](reference/actions/empty.md)
+  * [duplicate](reference/actions/duplicate.md)
+  * [remove](reference/actions/remove.md)
+  * [scrollIntoView](reference/actions/scrollintoview.md)
+  * [trigger](reference/actions/trigger.md)
+* [Selectors](reference/selectors/README.md)
+  * [id](reference/selectors/id.md)
+  * [class](reference/selectors/class.md)
+  * [name](reference/selectors/name.md)
+  * [tag](reference/selectors/tag.md)
+  * [self](reference/selectors/self.md)
+  * [parent](reference/selectors/parent.md)
 
-- **[Actions](actions/README.md)**
-  - **[show](actions/show.md)**
-  - **[hide](actions/hide.md)**
-  - **[addClass](actions/addClass.md)**
-  - **[removeClass](actions/removeClass.md)**
-  - **[toggleClass](actions/toggleClass.md)**
-  - **[setAttribute](actions/setAttribute.md)**
-  - **[removeAttribute](actions/removeClass.md)**
-  - **[empty](actions/empty.md)**
-  - **[duplicate](actions/duplicate.md)**
-  - **[remove](actions/remove.md)**
-  - **[scrollIntoView](actions/scrollIntoView.md)**
-  - **[trigger](actions/trigger.md)**
-
-- **[Selectors](selectors/README.md)**
-  - **[id](selectors/id.md)**
-  - **[class](selectors/class.md)**
-  - **[name](selectors/name.md)**
-  - **[tag](selectors/tag.md)**
-  - **[self](selectors/self.md)**
-  - **[parent](selectors/parent.md)**
