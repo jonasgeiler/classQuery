@@ -21,6 +21,6 @@ Hyphen-separated if non-external argument.
 - Add the class 'active' at double click on self: `cq_dblclick_addClass-active_self`
 - Add the classes 'active' and 'awesome' at double click on self: `cq_dblclick_addClass-active-awesome_self`
 - Add the class 'is-active' at double click on self:
-```
+```html
 <li class="cq_dblclick_addClass--_self" data-classes="is-active">Menu Item</li>
 ```

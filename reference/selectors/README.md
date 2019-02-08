@@ -26,7 +26,7 @@ Because this is the last part, the script just takes the rest of the classQuery!
 * Select all elements with class='modal':  `class-modal`
 * Select the element with id='very-important-link':  `id-very-important-link`
 * Select all elements with name='skayo':  `name-skayo`
-* Select all links \(`<a href="#">link</a>`\):  `tag-a`
+* Select all links (`<a href="#">link</a>`):  `tag-a`
 * Select the same element where the classQuery is \(modify itself\): `self`
 * Select the element's parent-element: `parent`
 

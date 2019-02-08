@@ -8,7 +8,7 @@ The structure of actions is very special, compared to the other parts of a class
 
 Let's take an example element with a classQuery:
 
-```markup
+```html
 <button class="cq_click_addClass-testClass_id-testElement"></button>
 ```
 
@@ -29,7 +29,7 @@ Now the library uses your external arguments, instead of the arguments directly 
 To set an external argument, you need to add a custom attribute to the element.  
 In this case: `data-classes`. So the element looks like this:
 
-```markup
+```html
 <button class="cq_click_addClass--_id-testElement" data-classes="testClass"></button>
 ```
 
@@ -45,8 +45,7 @@ This does the same as before, but now uses external arguments.
 * Trigger a click on an other element: `trigger-click`
 * Set the title of an other element: `setAttribute-title-Test`
 * Set the title of an other element with external arguments:
-
-  ```markup
+  ```html
   <button class="cq_click_setAttribute--_self" data-attributeName="title" data-attributeValue="Hello World">Set the title of myself to "Hello World"</button>
   ```
 
