@@ -38,13 +38,12 @@ Look [here](https://github.com/Skayo/classQuery/tree/fbc9d95f287311cbc4828843fdd
 
 * Hide an element on button click:
 
-  \`\`\`html
+```html
+<button class="cq_click_hide_id-example">Hide #example</button>
 
-  Hide \#example
+<p id="example">This element vanishes when you press the button above!</p>
+```
 
-This elements vanishes when you press the button above!
-
-```text
 - Add a class to an element when the finished loading:
 ```html
 <p class="cq_init_hide_self">This element is never visible!</p>
@@ -52,15 +51,25 @@ This elements vanishes when you press the button above!
 
 * Smoothly scroll to different parts of the website:
 
-  \`\`\`html
+```html
+<a href="#" class="cq_click_scrollIntoView-smooth_id-introduction">Go to introduction</a>
+<a href="#" class="cq_click_scrollIntoView-smooth_id-contact">Go to contact form</a>
+<a href="#" class="cq_click_scrollIntoView-smooth_id-members">Go to members list</a>
+ 
+<!-- Some other content ... -->
+ 
+<div id="introduction">
+  This is the introduction!
+</div>
 
-  [Go to introduction](what-are-classqueries.md)
+<div id="contact">
+  This is a contact form.
+</div>
 
-  [Go to contact form](what-are-classqueries.md)
-
-  [Go to members list](what-are-classqueries.md)
-
-\`\`\`
+<div class="members">
+  This is a list with all members.
+</div>
+```
 
 * More examples coming soon!
 
