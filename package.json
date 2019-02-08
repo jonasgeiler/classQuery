@@ -1,0 +1,42 @@
+{
+	"name": "classquery",
+	"version": "1.0.0",
+	"description": "A JavaScript DOM-Library where everything happens in class-attributes!",
+	"main": "src/classQuery.js",
+	"bin": {
+		"generateDocs": "generateDocs.js"
+	},
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"test": "cd test && php -S localhost:3001",
+		"generateDocs": "node bin/generateDocs.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Skayo/classQuery.git"
+	},
+	"keywords": [
+		"jquery",
+		"dom",
+		"javascript",
+		"library",
+		"class",
+		"attributes",
+		"html",
+		"devrant",
+		"for-fun",
+		"minimal",
+		"simple"
+	],
+	"author": "Skayo",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Skayo/classQuery/issues"
+	},
+	"homepage": "https://github.com/Skayo/classQuery#readme",
+	"devDependencies": {
+		"comment-parser": "^0.5.4"
+	}
+}
