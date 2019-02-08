@@ -58,17 +58,12 @@ class classQuery {
 		const classQueryElements = document.querySelectorAll('*[class*="cq_"]');
 		this.classQueries = [];
 
-		let classQueryIDCount = 0;
-
 		classQueryElements.forEach(element => {
 			element.classList.forEach(elementClass => {
 				if (elementClass.startsWith('cq_')) {
 					let newClassQuery = {};
 					newClassQuery.query = elementClass;
 					newClassQuery.element = element;
-
-					newClassQuery.id = classQueryIDCount;
-					classQueryIDCount++;
 
 					const classQueryParts = elementClass.split('_');
 
@@ -149,6 +144,7 @@ class classQuery {
 	/*
 	EVENTS - the first part of the classQuery (init, click, input, change, ...)
 	*/
+
 
 	// Get all non-special events (like click, dblclick, input, ...)
 	getNonSpecialEvents() {
@@ -232,10 +228,18 @@ class classQuery {
 		_classQuery.element.addEventListener(event, _classQuery.action);
 	}
 
-	// Gets executed at the start of classQuery
+	/**
+	 * This event emits, when the classQuery-class gets initialized. So basically when the script starts.
+	 * That's it.
+	 * Useful for hiding an element by default: `cq_init_hide_self`
+	 *
+	 * @cq_part event
+	 * @cq_partName init
+	 */
 	event_init(_classQuery) {
 		_classQuery.action();
 	}
+
 
 
 
@@ -243,6 +247,16 @@ class classQuery {
 	ACTIONS - the second part of the classQuery (show, hide, remove, ...); DOM Manipulations
 	*/
 
+
+	/**
+	 * Un-hide an element.
+	 * (Removes `display: none` style and replaces it with `display: inherit`)
+	 *
+	 * @cq_part action
+	 * @cq_partName show
+	 * @cq_examples
+	 * - Show #notifications at button click: `cq_click_show_id-notifications`
+	 */
 	action_show(_classQuery) {
 		if (_classQuery.areActionArgumentsExternal) {
 			classQuery.error('"' + _classQuery.actionName + '"-Action doesn\'t require any arguments!', _classQuery.element);
@@ -259,6 +273,15 @@ class classQuery {
 		}
 	}
 
+	/**
+	 * Hide an element.
+	 * (Adds `display: none`)
+	 *
+	 * @cq_part action
+	 * @cq_partName hide
+	 * @cq_examples
+	 * - Hide #notifications at button click: `cq_click_hide_id-notifications`
+	 */
 	action_hide(_classQuery) {
 		if (_classQuery.areActionArgumentsExternal) {
 			classQuery.error('"' + _classQuery.actionName + '"-Action doesn\'t require any arguments!', _classQuery.element);
@@ -275,6 +298,22 @@ class classQuery {
 		}
 	}
 
+	/**
+	 * Adds one or more classes to an element.
+	 *
+	 * @cq_part action
+	 * @cq_partName addClass
+	 * @cq_arg classes A list of classes to add.
+	 * Space-separated if external argument.
+	 * Hyphen-separated if non-external argument.
+	 * @cq_examples
+	 * - Add the class 'active' at double click on self: `cq_dblclick_addClass-active_self`
+	 * - Add the classes 'active' and 'awesome' at double click on self: `cq_dblclick_addClass-active-awesome_self`
+	 * - Add the class 'is-active' at double click on self:
+	 *   ```html
+	 *   <li class="cq_dblclick_addClass--_self" data-classes="is-active">Menu Item</li>
+	 *   ```
+	 */
 	action_addClass(_classQuery) {
 		if (!_classQuery.areActionArgumentsExternal && _classQuery.actionArguments.length < 1) {
 			classQuery.error('"' + _classQuery.actionName + '"-Action requires at least 1 argument!', _classQuery.element);
@@ -510,30 +549,71 @@ class classQuery {
 
 
 
+
 	/*
 	SELECTORS - the third part of the classQuery (id, class, name, tagname, ...); CSS selectors
 	*/
 
+
+	/**
+	 * Select an element by it's id.
+	 * (Similar to the `#`-sign in css)
+	 *
+	 * @cq_part selector
+	 * @cq_partName id
+	 */
 	selector_id(_classQuery) {
 		return [document.getElementById(_classQuery.selectorElement)];
 	}
 
+	/**
+	 * Select all elements within the same class.
+	 * (Similar to the `.`-sign in css)
+	 *
+	 * @cq_part selector
+	 * @cq_partName class
+	 */
 	selector_class(_classQuery) {
 		return document.getElementsByClassName(_classQuery.selectorElement);
 	}
 
+	/**
+	 * Select an element by it's name.
+	 * (Similar to the `*[name='<theName>']`-selector in css)
+	 *
+	 * @cq_part selector
+	 * @cq_partName name
+	 */
 	selector_name(_classQuery) {
 		return document.getElementsByName(_classQuery.selectorElement);
 	}
 
+	/**
+	 * Select all elements of the same tag name.
+	 *
+	 * @cq_part selector
+	 * @cq_partName tag
+	 */
 	selector_tag(_classQuery) {
 		return document.getElementsByTagName(_classQuery.selectorElement);
 	}
 
+	/**
+	 * Select the element where the classQuery is.
+	 *
+	 * @cq_part selector
+	 * @cq_partName self
+	 */
 	selector_self(_classQuery) {
 		return [_classQuery.element];
 	}
 
+	/**
+	 * Select the parent of the element where the classQuery is.
+	 *
+	 * @cq_part selector
+	 * @cq_partName parent
+	 */
 	selector_parent(_classQuery) {
 		return [_classQuery.element.parentElement];
 	}
