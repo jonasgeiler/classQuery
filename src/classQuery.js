@@ -230,7 +230,6 @@ class classQuery {
 
 	/**
 	 * This event emits, when the classQuery-class gets initialized. So basically when the script starts.
-	 * That's it.
 	 * Useful for hiding an element by default: `cq_init_hide_self`
 	 *
 	 * @cq_part event
@@ -334,6 +333,22 @@ class classQuery {
 		}
 	}
 
+	/**
+	 * Removes one or more classes from an element.
+	 *
+	 * @cq_part action
+	 * @cq_partName removeClass
+	 * @cq_arg classes A list of classes to remove.
+	 * Space-separated if external argument.
+	 * Hyphen-separated if non-external argument.
+	 * @cq_examples
+	 * - Remove the class 'active' at double click from self: `cq_dblclick_removeClass-active_self`
+	 * - Remove the classes 'active' and 'awesome' at double click from self: `cq_dblclick_removeClass-active-awesome_self`
+	 * - Remove the class 'is-active' at double click from self:
+	 *   ```html
+	 *   <li class="cq_dblclick_removeClass--_self" data-classes="is-active">Menu Item</li>
+	 *   ```
+	 */
 	action_removeClass(_classQuery) {
 		if (!_classQuery.areActionArgumentsExternal && _classQuery.actionArguments.length < 1) {
 			classQuery.error('"' + _classQuery.actionName + '"-Action requires at least 1 argument!', _classQuery.element);
@@ -343,17 +358,35 @@ class classQuery {
 
 		for (let i = 0; i < elements.length; i++) {
 			if (_classQuery.areActionArgumentsExternal) {
-				_classQuery.actionArguments.classes.split(' ').forEach(classToAdd => {
-					elements[i].classList.remove(classToAdd);
+				_classQuery.actionArguments.classes.split(' ').forEach(classToRemove => {
+					elements[i].classList.remove(classToRemove);
 				});
 			} else {
-				_classQuery.actionArguments.forEach(classToAdd => {
-					elements[i].classList.remove(classToAdd);
+				_classQuery.actionArguments.forEach(classToRemove => {
+					elements[i].classList.remove(classToRemove);
 				});
 			}
 		}
 	}
 
+	/**
+	 * Toggles one or more classes on an element.
+	 * If the element already has the class, remove it.
+	 * If the element doesn't have the class, add it.
+	 *
+	 * @cq_part action
+	 * @cq_partName toggleClass
+	 * @cq_arg classes A list of classes to toggle.
+	 * Space-separated if external argument.
+	 * Hyphen-separated if non-external argument.
+	 * @cq_examples
+	 * - Toggle the class 'active' at double click on self: `cq_dblclick_toggleClass-active_self`
+	 * - Toggle the classes 'active' and 'awesome' at double click on self: `cq_dblclick_toggleClass-active-awesome_self`
+	 * - Toggle the class 'is-active' at double click on self:
+	 *   ```html
+	 *   <li class="cq_dblclick_toggleClass--_self" data-classes="is-active">Menu Item</li>
+	 *   ```
+	 */
 	action_toggleClass(_classQuery) {
 		if (!_classQuery.areActionArgumentsExternal && _classQuery.actionArguments.length < 1) {
 			classQuery.error('"' + _classQuery.actionName + '"-Action requires at least 1 argument!', _classQuery.element);
@@ -374,6 +407,33 @@ class classQuery {
 		}
 	}
 
+	/**
+	 * Set the attribute on an element to a specific value.
+	 *
+	 * @cq_part action
+	 * @cq_partName setAttribute
+	 * @cq_arg attributeName The name of the attribute to set.
+	 * For example 'disabled'.
+	 * @cq_arg attributeValue The value to set the attribute to.
+	 * For example 'true' (when attributeName is 'disabled').
+	 * @cq_examples
+	 * - Set language attribute on the HTML tag when clicked on a button:
+	 *   ```html
+	 *   <html lang="en">
+	 *     <body>
+	 *       <button class="cq_click_setAttribute-lang-en_tag-html">Switch to English</button>
+	 *       <button class="cq_click_setAttribute-lang-de_tag-html">Switch to German</button>
+	 *       <button class="cq_click_setAttribute-lang-fr_tag-html">Switch to French</button>
+	 *     </body>
+	 *   </html>
+	 *   ```
+	 * - Set a link when double clicked on a button:
+	 *   ```html
+	 *   <a name="link" href="#" target="_blank">This is a link</a>
+	 *
+	 *   <button class="cq_click_setAttribute--_name-link" data-attributeName="href" data-attributeValue="https://google.com">Change link</button>
+	 *   ```
+	 */
 	action_setAttribute(_classQuery) {
 		if (_classQuery.areActionArgumentsExternal) {
 			if (!_classQuery.actionArguments.attributename) {
@@ -400,6 +460,16 @@ class classQuery {
 		}
 	}
 
+	/**
+	 * Remove an attribute from an element.
+	 *
+	 * @cq_part action
+	 * @cq_partName removeAttribute
+	 * @cq_arg attributeName The name of the attribute to remove.
+	 * For example 'disabled'.
+	 * @cq_examples
+	 * - Un-disable another element on click: `cq_click_removeAttribute-disabled_id-otherElement`
+	 */
 	action_removeAttribute(_classQuery) {
 		if (_classQuery.areActionArgumentsExternal) {
 			if (!_classQuery.actionArguments.attributename) {

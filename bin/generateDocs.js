@@ -3,7 +3,7 @@ const parser = require('comment-parser');
 
 const classQueryFile = fs.readFileSync('./src/classQuery.js', 'utf-8');
 
-const docBlocks = parser(classQueryFile);
+const docBlocks = parser(classQueryFile, {trim: false});
 
 if (!fs.existsSync('./docs')) {
 	console.error('No /docs folder!\n');
@@ -17,7 +17,9 @@ docBlocks.forEach(docBlock => {
 
 	sections.push({
 		title:   'Description',
-		content: docBlock.description.replace('\n', '  \n')
+		content: docBlock.description
+		                 .trim()
+		                 .replace(/(\r\n|\n|\r)/g, '  $1')
 	});
 
 	let arguments = [];
@@ -40,7 +42,10 @@ docBlocks.forEach(docBlock => {
 			case 'cq_examples':
 				sections.push({
 					title:   'Examples',
-					content: tag.source.replace('@cq_examples', '').trim()
+					content: tag.source
+					            .replace('@cq_examples', '')
+					            .trim()
+					            .replace(/(\r\n|\n|\r)/g, '  $1')
 				});
 				break;
 
@@ -48,6 +53,8 @@ docBlocks.forEach(docBlock => {
 				arguments.push({
 					name:        tag.name,
 					description: tag.description
+					                .trim()
+					                .replace(/(\r\n|\n|\r)/g, '  $1')
 				});
 				break;
 		}
