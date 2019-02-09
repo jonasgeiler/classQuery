@@ -11,7 +11,7 @@ If you use non-external arguments, use the order of the arguments as written her
 
 #### attributeName
 
-The name of the attribute to remove.
+The name of the attribute to remove.  
 For example 'disabled'.
 
 
