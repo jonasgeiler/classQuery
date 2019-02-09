@@ -13,7 +13,7 @@
 		</style>
 	</head>
 	<body class="cq_init_setAttribute--_class-test-text" data-attributeName="title" data-attributeValue="test text">
-		<button class="cq_click_scrollIntoView-smooth-end_id-scroll_into_view">ScrollIntoView</button>
+		<button class="cq_click_scrollTo-smooth-end_id-scroll_into_view">ScrollIntoView</button>
 
 		<br>
 
@@ -54,16 +54,30 @@
 		<br><br>
 
 		<div class="cq_init_hide_self modal-view">Modal</div>
-		<button class="cq_click_addClass--_class-modal-view cq_click_show_class-modal-view" data-classes="is-active is-amazing">Activate Modal</button>
+		<button class="cq_click_addClass--_class-modal-view cq_click_show_class-modal-view" data-classes="is-active is-amazing">Activate Modal
+		</button>
 
 		<br><br>
 
-		<div>
-			<button class="cq_click_hide_parent">Hide my parent element!</button>
+		<div class="notification">
+			<a href="#" class="cq_click_remove_parent">X</a>
+
+			<p class="notification-content">
+				Some content ...
+			</p>
 		</div>
 
 		<a name="link" href="#" target="_blank">This is a link</a>
 		<button class="cq_click_setAttribute--_name-link" data-attributeName="href" data-attributeValue="https://google.com">Change link</button>
+
+		<div>
+			<div>
+				<input name="test[]" type="text" class="testInput">
+			</div>
+
+			<button class="cq_click_duplicate_class-testInput">FREEZE!!!</button>
+		</div>
+
 
 		<br><br><br><br><br><br>
 		<div id="scroll_into_view">ScrollIntoView</div>

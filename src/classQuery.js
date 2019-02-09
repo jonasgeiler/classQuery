@@ -7,6 +7,18 @@ cq_event_addClass-theClassToAdd_id-test
 
 */
 
+/*
+TODO:
+- preventDefault for non-special events
+- duplicate: Where the copied element appears
+- trigger: Fix the seperation of built-in events (click on link) and custom events (onclick)
+- Page freeze:
+  <div>
+    <input name="test[]" type="text" class="testInput">
+  </div>
+  <button class="cq_click_duplicate_class-testInput">I need more input fields!</button>
+*/
+
 
 class classQuery {
 	/*
@@ -229,11 +241,13 @@ class classQuery {
 	}
 
 	/**
-	 * This event emits, when the classQuery-class gets initialized. So basically when the script starts.
-	 * Useful for hiding an element by default: `cq_init_hide_self`
+	 * This event emits, when the classQuery-class gets initialized.
+	 * So basically when the page finished loading.
 	 *
 	 * @cq_part event
 	 * @cq_partName init
+	 * @cq_example
+	 * - Hide an element by at page load: `cq_init_hide_self`
 	 */
 	event_init(_classQuery) {
 		_classQuery.action();
@@ -254,7 +268,7 @@ class classQuery {
 	 * @cq_part action
 	 * @cq_partName show
 	 * @cq_examples
-	 * - Show #notifications at button click: `cq_click_show_id-notifications`
+	 * - Show element with id "notifications" at button click: `cq_click_show_id-notifications`
 	 */
 	action_show(_classQuery) {
 		if (_classQuery.areActionArgumentsExternal) {
@@ -279,7 +293,7 @@ class classQuery {
 	 * @cq_part action
 	 * @cq_partName hide
 	 * @cq_examples
-	 * - Hide #notifications at button click: `cq_click_hide_id-notifications`
+	 * - Hide element with id "notifications" at button click: `cq_click_hide_id-notifications`
 	 */
 	action_hide(_classQuery) {
 		if (_classQuery.areActionArgumentsExternal) {
@@ -306,9 +320,9 @@ class classQuery {
 	 * Space-separated if external argument.
 	 * Hyphen-separated if non-external argument.
 	 * @cq_examples
-	 * - Add the class 'active' at double click on self: `cq_dblclick_addClass-active_self`
-	 * - Add the classes 'active' and 'awesome' at double click on self: `cq_dblclick_addClass-active-awesome_self`
-	 * - Add the class 'is-active' at double click on self:
+	 * - Add the class 'active' to self at double click: `cq_dblclick_addClass-active_self`
+	 * - Add the classes 'active' and 'awesome' to self at double click: `cq_dblclick_addClass-active-awesome_self`
+	 * - Add the class 'is-active' to self at double click:
 	 *   ```html
 	 *   <li class="cq_dblclick_addClass--_self" data-classes="is-active">Menu Item</li>
 	 *   ```
@@ -342,9 +356,9 @@ class classQuery {
 	 * Space-separated if external argument.
 	 * Hyphen-separated if non-external argument.
 	 * @cq_examples
-	 * - Remove the class 'active' at double click from self: `cq_dblclick_removeClass-active_self`
-	 * - Remove the classes 'active' and 'awesome' at double click from self: `cq_dblclick_removeClass-active-awesome_self`
-	 * - Remove the class 'is-active' at double click from self:
+	 * - Remove the class 'active' from self at double click: `cq_dblclick_removeClass-active_self`
+	 * - Remove the classes 'active' and 'awesome' from self at double click: `cq_dblclick_removeClass-active-awesome_self`
+	 * - Remove the class 'is-active' from self at double click:
 	 *   ```html
 	 *   <li class="cq_dblclick_removeClass--_self" data-classes="is-active">Menu Item</li>
 	 *   ```
@@ -380,9 +394,9 @@ class classQuery {
 	 * Space-separated if external argument.
 	 * Hyphen-separated if non-external argument.
 	 * @cq_examples
-	 * - Toggle the class 'active' at double click on self: `cq_dblclick_toggleClass-active_self`
-	 * - Toggle the classes 'active' and 'awesome' at double click on self: `cq_dblclick_toggleClass-active-awesome_self`
-	 * - Toggle the class 'is-active' at double click on self:
+	 * - Toggle the class 'active' on self at double click: `cq_dblclick_toggleClass-active_self`
+	 * - Toggle the classes 'active' and 'awesome' on self at double click: `cq_dblclick_toggleClass-active-awesome_self`
+	 * - Toggle the class 'is-active' on self at double click:
 	 *   ```html
 	 *   <li class="cq_dblclick_toggleClass--_self" data-classes="is-active">Menu Item</li>
 	 *   ```
@@ -492,6 +506,15 @@ class classQuery {
 		}
 	}
 
+	/**
+	 * Removes all children of an element.
+	 * (Sets innerHTML to '')
+	 *
+	 * @cq_part action
+	 * @cq_partName empty
+	 * @cq_examples
+	 * - Clear all table data at click: `cq_click_empty_tag-tbody`
+	 */
 	action_empty(_classQuery) {
 		if (_classQuery.areActionArgumentsExternal) {
 			classQuery.error('"' + _classQuery.actionName + '"-Action doesn\'t require any arguments!', _classQuery.element);
@@ -508,6 +531,24 @@ class classQuery {
 		}
 	}
 
+	/**
+	 * Duplicate an element.
+	 * (Insert a copy of an element after the copied element)
+	 *
+	 * @cq_part action
+	 * @cq_partName duplicate
+	 * @cq_examples
+	 * - Additional fields in form:
+	 *   ```html
+	 *   <div id="form">
+	 *     <div id="inputFields">
+	 *       <input name="test[]" type="text" id="testInput">
+	 *     </div>
+	 *
+	 *     <button class="cq_click_duplicate_id-testInput">I need more input fields!</button>
+	 *   </div>
+	 *   ```
+	 */
 	action_duplicate(_classQuery) {
 		if (_classQuery.areActionArgumentsExternal) {
 			classQuery.error('"' + _classQuery.actionName + '"-Action doesn\'t require any arguments!', _classQuery.element);
@@ -524,6 +565,23 @@ class classQuery {
 		}
 	}
 
+	/**
+	 * Completely remove an element.
+	 *
+	 * @cq_part action
+	 * @cq_partName remove
+	 * @cq_examples
+	 * - Dismiss notification:
+	 *   ```html
+	 *   <div class="notification">
+	 *     <button class="cq_click_remove_parent">×</button>
+	 *
+	 *     <p class="notification-content">
+	 *       Some content ...
+	 *     </p>
+	 *   </div>
+	 *   ```
+	 */
 	action_remove(_classQuery) {
 		if (_classQuery.areActionArgumentsExternal) {
 			classQuery.error('"' + _classQuery.actionName + '"-Action doesn\'t require any arguments!', _classQuery.element);
@@ -540,7 +598,39 @@ class classQuery {
 		}
 	}
 
-	action_scrollIntoView(_classQuery) {
+	/**
+	 * Scroll an element into view.
+	 *
+	 * @cq_part action
+	 * @cq_partName scrollTo
+	 * @cq_arg behavior How to scroll. Either 'auto' or 'smooth'.
+	 * Look [here](https://developer.mozilla.org/de/docs/Web/API/Element/scrollIntoView) for more information!
+	 * @cq_arg position The position in the view to scroll to. Either 'start' or 'end'.
+	 * Look [here](https://developer.mozilla.org/de/docs/Web/API/Element/scrollIntoView) for more information!
+	 * (Referenced as 'block', not 'position', there.)
+	 * @cq_examples
+	 * - Smoothly scroll to different parts of the website:
+	 *   ```html
+	 *   <a href="#" class="cq_click_scrollTo-smooth-start_id-introduction">Go to introduction</a>
+	 *   <a href="#" class="cq_click_scrollTo-smooth_id-contact">Go to contact form</a>
+	 *   <a href="#" class="cq_click_scrollTo-smooth-end_id-members">Go to members list</a>
+	 *
+	 *   <!-- Some other content ... -->
+	 *
+	 *   <div id="introduction">
+	 *     This is the introduction!
+	 *   </div>
+	 *
+	 *   <div id="contact">
+	 *     This is a contact form.
+	 *   </div>
+	 *
+	 *   <div class="members">
+	 *     This is a list with all members.
+	 *   </div>
+	 *   ```
+	 */
+	action_scrollTo(_classQuery) {
 		if (!_classQuery.areActionArgumentsExternal && _classQuery.actionArguments.length > 2) {
 			classQuery.error('"' + _classQuery.actionName + '"-Action takes only 2 optional arguments!', _classQuery.element);
 		}
@@ -567,7 +657,7 @@ class classQuery {
 					if (_classQuery.actionArguments.position === 'start' || _classQuery.actionArguments.position === 'end') {
 						scrollOptions.block = _classQuery.actionArguments.position;
 					} else {
-						classQuery.error('"' + _classQuery.actionName + '"-Action argument "start" must be "top" or "end" - invalid value!', _classQuery.element);
+						classQuery.error('"' + _classQuery.actionName + '"-Action argument "position" must be "start" or "end" - invalid value!', _classQuery.element);
 					}
 				}
 			} else {
@@ -592,6 +682,27 @@ class classQuery {
 		}
 	}
 
+	/**
+	 * Trigger an event on an element.
+	 *
+	 * @cq_part action
+	 * @cq_partName trigger
+	 * @cq_arg event The event to trigger.
+	 * For example 'click'.
+	 * @cq_examples
+	 * - Trigger submit in a form:
+	 *   ```html
+	 *   <form action="/login" method="post">
+	 *     <input name="username" type="text">
+	 *
+	 *     <input type="submit" id="submitForm">
+	 *   </form>
+	 *
+	 *   <a href="#" class="cq_click_trigger-click_id-submitForm">Trigger submit!</a>
+	 *   ```
+	 *   Note: At the time of writing, this example does not work, due to a bug.
+	 *
+	 */
 	action_trigger(_classQuery) {
 		let eventName = '';
 
