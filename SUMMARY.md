@@ -19,7 +19,7 @@
   * [empty](reference/actions/empty.md)
   * [duplicate](reference/actions/duplicate.md)
   * [remove](reference/actions/remove.md)
-  * [scrollIntoView](reference/actions/scrollintoview.md)
+  * [scrollTo](reference/actions/scrollto.md)
   * [trigger](reference/actions/trigger.md)
 * [Selectors](reference/selectors/README.md)
   * [id](reference/selectors/id.md)

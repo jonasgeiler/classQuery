@@ -50,9 +50,9 @@ Look [here](https://github.com/Skayo/classQuery/tree/fbc9d95f287311cbc4828843fdd
 
 * Smoothly scroll to different parts of the website:
   ```html
-  <a href="#" class="cq_click_scrollIntoView-smooth_id-introduction">Go to introduction</a>
-  <a href="#" class="cq_click_scrollIntoView-smooth_id-contact">Go to contact form</a>
-  <a href="#" class="cq_click_scrollIntoView-smooth_id-members">Go to members list</a>
+  <a href="#" class="cq_click_scrollTo-smooth_id-introduction">Go to introduction</a>
+  <a href="#" class="cq_click_scrollTo-smooth_id-contact">Go to contact form</a>
+  <a href="#" class="cq_click_scrollTo-smooth_id-members">Go to members list</a>
   
   <!-- Some other content ... -->
   

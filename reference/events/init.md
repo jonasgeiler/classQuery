@@ -2,5 +2,5 @@
 
 ## Description
 
-This event emits, when the classQuery-class gets initialized. So basically when the script starts.  
-Useful for hiding an element by default: `cq_init_hide_self`
+This event emits, when the classQuery-class gets initialized.  
+So basically when the page finished loading.

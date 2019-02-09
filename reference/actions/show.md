@@ -7,4 +7,4 @@ Un-hide an element.
 
 ## Examples
 
-- Show #notifications at button click: `cq_click_show_id-notifications`
+- Show element with id "notifications" at button click: `cq_click_show_id-notifications`

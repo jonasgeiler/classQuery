@@ -18,9 +18,9 @@ Hyphen-separated if non-external argument.
 
 ## Examples
 
-- Remove the class 'active' at double click from self: `cq_dblclick_removeClass-active_self`  
-- Remove the classes 'active' and 'awesome' at double click from self: `cq_dblclick_removeClass-active-awesome_self`  
-- Remove the class 'is-active' at double click from self:  
+- Remove the class 'active' from self at double click: `cq_dblclick_removeClass-active_self`  
+- Remove the classes 'active' and 'awesome' from self at double click: `cq_dblclick_removeClass-active-awesome_self`  
+- Remove the class 'is-active' from self at double click:  
   ```html  
   <li class="cq_dblclick_removeClass--_self" data-classes="is-active">Menu Item</li>  
   ```

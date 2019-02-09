@@ -7,4 +7,4 @@ Hide an element.
 
 ## Examples
 
-- Hide #notifications at button click: `cq_click_hide_id-notifications`
+- Hide element with id "notifications" at button click: `cq_click_hide_id-notifications`

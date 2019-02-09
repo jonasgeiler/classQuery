@@ -20,9 +20,9 @@ Hyphen-separated if non-external argument.
 
 ## Examples
 
-- Toggle the class 'active' at double click on self: `cq_dblclick_toggleClass-active_self`  
-- Toggle the classes 'active' and 'awesome' at double click on self: `cq_dblclick_toggleClass-active-awesome_self`  
-- Toggle the class 'is-active' at double click on self:  
+- Toggle the class 'active' on self at double click: `cq_dblclick_toggleClass-active_self`  
+- Toggle the classes 'active' and 'awesome' on self at double click: `cq_dblclick_toggleClass-active-awesome_self`  
+- Toggle the class 'is-active' on self at double click:  
   ```html  
   <li class="cq_dblclick_toggleClass--_self" data-classes="is-active">Menu Item</li>  
   ```
